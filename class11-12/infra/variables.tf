@@ -20,8 +20,8 @@ variable "tag" {
 }
 
 variable "container_port" {
-  type    = string
-  default = "8000"
+  type    = number
+  default = 8000
 }
 variable "health_check_path" {
   type    = string
