@@ -45,9 +45,8 @@ jobs:
       - name: Build, tag, and push image to Amazon ECR
         run: |
           cd ${{ env.path }}
-          docker build -t ${{ secrets.AWS_ACCOUNT }}.dkr.ecr.${{ env.aws_region }}.amazonaws.com/${{ env.ecr_repo}}:latest .
-          docker push ${{ secrets.AWS_ACCOUNT }}.dkr.ecr.${{ env.aws_region }}.amazonaws.com/${{ env.ecr_repo}}:latest
-          
+          docker build -t ${{ secrets.AWS_ACCOUNT }}.dkr.ecr.${{ env.aws_region }}.amazonaws.com/${{ env.ecr_repo}}:${{ env.tag }} .
+          docker push ${{ secrets.AWS_ACCOUNT }}.dkr.ecr.${{ env.aws_region }}.amazonaws.com/${{ env.ecr_repo}}:${{ env.tag }}
 
   deploy:
     needs: build
