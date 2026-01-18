@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}Student Dashboard{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto">
+    <h2 class="text-4xl font-normal mb-8">My Enrolled Courses</h2>
+
+    {% if courses %}
+        <div class="space-y-6">
+            {% for course in courses %}
+            <div class="bg-white rounded-lg shadow-md p-8">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-2">{{ course.name }}</h3>
+                        <span class="inline-block px-3 py-1 text-sm rounded-full
+                            {% if course.status == 'Active' %}bg-green-100 text-green-800
+                            {% elif course.status == 'Completed' %}bg-gray-100 text-gray-800
+                            {% else %}bg-blue-100 text-blue-800{% endif %}">
+                            {{ course.status }}
+                        </span>
+                    </div>
+                </div>
+
+                {% if course.description %}
+                <p class="text-xl text-gray-600 mb-4">{{ course.description }}</p>
+                {% endif %}
+
+                <div class="grid grid-cols-2 gap-4 mb-6 text-lg">
+                    {% if course.start_date %}
+                    <div>
+                        <span class="font-medium text-gray-700">Start Date:</span>
+                        <span class="ml-2 text-gray-600">{{ course.start_date.strftime('%B %d, %Y') }}</span>
+                    </div>
+                    {% endif %}
+
+                    {% if course.end_date %}
+                    <div>
+                        <span class="font-medium text-gray-700">End Date:</span>
+                        <span class="ml-2 text-gray-600">{{ course.end_date.strftime('%B %d, %Y') }}</span>
+                    </div>
+                    {% endif %}
+
+                    <div>
+                        <span class="font-medium text-gray-700">Teachers:</span>
+                        <span class="ml-2 text-gray-600">
+                            {% if course.teachers %}
+                                {{ course.teachers|map(attribute='username')|join(', ') }}
+                            {% else %}
+                                Not assigned
+                            {% endif %}
+                        </span>
+                    </div>
+
+                    <div>
+                        <span class="font-medium text-gray-700">Total Classes:</span>
+                        <span class="ml-2 text-gray-600">{{ course.classes|length }}</span>
+                    </div>
+                </div>
+
+                {% if course.classes %}
+                <div class="border-t pt-4">
+                    <h4 class="text-xl font-semibold mb-3">Recent Classes</h4>
+                    <div class="space-y-3">
+                        {% for class in course.classes[:3] %}
+                        <div class="flex justify-between items-center bg-gray-50 p-4 rounded">
+                            <div>
+                                <p class="font-medium">{{ class.date.strftime('%B %d, %Y') }}</p>
+                                <p class="text-gray-600">{{ class.time }}</p>
+                            </div>
+                            <div class="flex gap-3">
+                                {% if class.session_link %}
+                                <a href="{{ class.session_link }}" target="_blank"
+                                   class="text-blue-600 hover:underline">Session</a>
+                                {% endif %}
+                                {% if class.recording_link %}
+                                <a href="{{ class.recording_link }}" target="_blank"
+                                   class="text-blue-600 hover:underline">Recording</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="bg-white rounded-lg shadow-md p-8 text-center">
+            <p class="text-xl text-gray-600">You are not enrolled in any courses yet.</p>
+            <p class="text-lg text-gray-500 mt-2">Contact your administrator to enroll in courses.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

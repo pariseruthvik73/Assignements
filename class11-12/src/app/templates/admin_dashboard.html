@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto">
+    <h2 class="text-4xl font-normal mb-8">Admin Dashboard</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div class="bg-white rounded-lg shadow-md p-8">
+            <h3 class="text-xl text-gray-600 mb-2">Total Courses</h3>
+            <p class="text-5xl font-bold text-navy">{{ total_courses }}</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-8">
+            <h3 class="text-xl text-gray-600 mb-2">Total Teachers</h3>
+            <p class="text-5xl font-bold text-navy">{{ total_teachers }}</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-8">
+            <h3 class="text-xl text-gray-600 mb-2">Total Students</h3>
+            <p class="text-5xl font-bold text-navy">{{ total_students }}</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-8">
+            <h3 class="text-xl text-gray-600 mb-2">Total Classes</h3>
+            <p class="text-5xl font-bold text-navy">{{ total_classes }}</p>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-lg shadow-md p-8">
+            <h3 class="text-2xl font-semibold mb-4">Quick Actions</h3>
+            <div class="space-y-4">
+                <a href="{{ url_for('main.add_course') }}"
+                   class="block text-xl bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 text-center">
+                    Create New Course
+                </a>
+                <a href="{{ url_for('main.courses') }}"
+                   class="block text-xl bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 text-center">
+                    Manage Courses
+                </a>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-8">
+            <h3 class="text-2xl font-semibold mb-4">System Overview</h3>
+            <ul class="space-y-3 text-xl">
+                <li class="flex justify-between">
+                    <span class="text-gray-600">Active Courses:</span>
+                    <span class="font-semibold">{{ total_courses }}</span>
+                </li>
+                <li class="flex justify-between">
+                    <span class="text-gray-600">Teaching Staff:</span>
+                    <span class="font-semibold">{{ total_teachers }}</span>
+                </li>
+                <li class="flex justify-between">
+                    <span class="text-gray-600">Enrolled Students:</span>
+                    <span class="font-semibold">{{ total_students }}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
