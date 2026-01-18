@@ -1,6 +1,6 @@
 # terraform build
 
-name: c12 Build ECS Infr
+name: c12 destroy
 
 on:
   # push:
