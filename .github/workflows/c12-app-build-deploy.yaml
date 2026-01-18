@@ -2,11 +2,11 @@ name: class12 deploy
 
 on:
 
-  # push:
-  #   branches:
-  #     - main
-  #   path:
-  #     - class11-12/src/**
+  push:
+    branches:
+      - main
+    path:
+      - class11-12/src/**
   workflow_dispatch:
 
 env:
@@ -79,7 +79,7 @@ jobs:
         with:
           task-definition: task-definition.json
           container-name: ${{ env.ECS_APP_CONTAINER_NAME }}
-          image: ${{ env.IMAGE_REPO_NAME }}:${{ github.sha }}
+          image: ${{ env.ecr_repo }}:${{ github.sha }}
 
       - name: Deploy app on Amazon ECS task definition
         if: ${{ github.ref == 'refs/heads/main' }}
