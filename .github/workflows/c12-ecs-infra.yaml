@@ -3,9 +3,10 @@
 name: c12 Build ECS Infr
 
 on:
-  push:
-    branches:
-      - main  
+  # push:
+  #   branches:
+  #     - main  
+  workflow_dispatch:
 
 env:
   AWS_REGION: ap-south-1
