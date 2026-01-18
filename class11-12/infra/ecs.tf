@@ -60,7 +60,7 @@ resource "aws_ecs_service" "app_service" {
   load_balancer {
     target_group_arn = aws_lb_target_group.app_tg.arn
     container_name   = "student-portal-container"
-    container_port   = 5000
+    container_port   = var.container_port
   }
 
   depends_on = [aws_db_instance.default]
