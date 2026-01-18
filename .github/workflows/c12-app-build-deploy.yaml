@@ -1,0 +1,37 @@
+name: docker build push
+
+on:
+  workflow_dispatch:
+
+env:
+  ecr_repo: student-portal
+  aws_region: ap-south-1
+  path: class11-12/src
+
+
+jobs:
+  image-build-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v5.1.1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.aws_region }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        run: |
+          aws ecr get-login-password --region ${{ env.aws_region }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT }}.dkr.ecr.${{ env.aws_region }}.amazonaws.com
+
+      - name: Build, tag, and push image to Amazon ECR
+        run: |
+          cd ${{ env.path }}
+          docker build -t ${{ secrets.AWS_ACCOUNT }}.dkr.ecr.${{ env.aws_region }}.amazonaws.com/${{ env.ecr_repo}}:latest .
+          docker push ${{ secrets.AWS_ACCOUNT }}.dkr.ecr.${{ env.aws_region }}.amazonaws.com/${{ env.ecr_repo}}:latest
+          
