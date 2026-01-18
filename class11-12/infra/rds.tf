@@ -1,6 +1,6 @@
 resource "aws_db_instance" "default" {
   allocated_storage      = 30
-  identifier            = "student-portal-db"
+  identifier             = "student-portal-db"
   db_name                = "studentportal"
   engine                 = "postgres"
   engine_version         = "14.15"

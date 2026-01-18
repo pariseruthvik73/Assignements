@@ -1,10 +1,10 @@
 
 variable "domain_name" {
-  type = string
+  type    = string
   default = "akhileshmishra.tech"
 }
 
 variable "subdomain" {
-  type = string
+  type    = string
   default = "class11"
 }
