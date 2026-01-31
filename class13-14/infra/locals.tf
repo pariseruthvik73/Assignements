@@ -10,8 +10,7 @@ locals {
       cpu                 = 512
       memory              = 1024
       container_port      = 5000
-      # repo                = aws_ecr_repository.ecr["flask"].repository_url
-      image               = "${aws_ecr_repository.ecr["flask"].repository_url}:latest"
+      # image               = "${aws_ecr_repository.ecr["flask"].repository_url}:latest"
       container_name      = "flask"
       container_port_name = "flask"
       
@@ -29,8 +28,7 @@ locals {
       cpu                 = 512
       memory              = 1024
       container_port      = 5000
-      # repo                = aws_ecr_repository.ecr["redis"].repository_url
-      image               = "${aws_ecr_repository.ecr["redis"].repository_url}:latest"
+      # image               = "${aws_ecr_repository.ecr["redis"].repository_url}:latest"
       container_name      = "redis"
       container_port_name = "redis"
 
