@@ -59,8 +59,8 @@ locals {
 
 
   ]
-
-  ecs_services_interpreted = { for svc in local.ecs_services : svc.name => svc }
+  # ecs_services_interpreted = { for svc in local.ecs_services : svc.name => svc }
+  ecs_services_interpreted = { for svc in local.ecs_services : svc.name => { for k, v in svc : k => v if k != "repo" } }
 }
 
 output "ecs_services" {
