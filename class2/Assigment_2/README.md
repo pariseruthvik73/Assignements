@@ -247,7 +247,7 @@ docker logs -f postgres-container-new
 
 ## Screenshots
 <img width="800" alt="Created DB with data" src="Screenshots/Screenshot 2026-02-07 005607.png" />
-<img width="800" alt="Viewing DB with data" src="Screenshots/Screenshot after png" />
+<img width="800" alt="Viewing DB with data" src="Screenshots/Screenshot after png.png" />
 
 
 ### Container won't start
