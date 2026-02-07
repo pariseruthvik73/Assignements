@@ -217,3 +217,10 @@ __marimo__/
 .terraform/*
 .terraform.lock.hcl
 .terraform/
+class1/
+class11-12/
+class13-14/
+class3-dockercompose/
+class5/
+class9/
+nov25-class4/

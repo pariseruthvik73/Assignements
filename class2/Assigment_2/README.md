@@ -245,6 +245,11 @@ docker logs -f postgres-container-new
 
 ## Troubleshooting
 
+## Screenshots
+<img width="800" alt="Created DB with data" src="Screenshots/Screenshot 2026-02-07 005607.png" />
+<img width="800" alt="Viewing DB with data" src="Screenshots/Screenshot after png" />
+
+
 ### Container won't start
 ```bash
 # Check if port 5432 is already in use
