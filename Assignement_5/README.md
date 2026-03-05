@@ -4,7 +4,7 @@
 
 This project deploys a PHP-based daily task tracker called DayFlow on AWS EC2 with a managed PostgreSQL database (RDS). The assignment demonstrates a full cloud deployment lifecycle using Docker, ECR, RDS, and Route53.
 
-Live URL: https://nov25.vishnukosuri.com  
+Live URL: https://nov25.ruthvik.com  
 Student: Ruthvik Parise  
 Tech Stack: PHP 8.2, nginx, PostgreSQL (RDS), Docker, AWS EC2
 
@@ -144,7 +144,7 @@ sudo pip3 install certbot
 docker stop $(docker ps -q)
 
 # Request SSL certificate
-sudo certbot certonly --standalone -d nov25.vishnukosuri.com --email pariseruthvik73@gmail.com --agree-tos --non-interactive
+sudo certbot certonly --standalone -d nov25.ruthvik.com --email pariseruthvik73@gmail.com --agree-tos --non-interactive
 ```
 
 Result: Certificate saved at `/etc/letsencrypt/live/nov25.vishnukosuri.com/fullchain.pem`
@@ -153,8 +153,8 @@ Copy certificates for Docker volume mount:
 
 ```bash
 mkdir -p ~/ssl
-sudo cp /etc/letsencrypt/live/nov25.vishnukosuri.com/fullchain.pem ~/ssl/cert.pem
-sudo cp /etc/letsencrypt/live/nov25.vishnukosuri.com/privkey.pem ~/ssl/key.pem
+sudo cp /etc/letsencrypt/live/nov25.ruthvik.com/fullchain.pem ~/ssl/cert.pem
+sudo cp /etc/letsencrypt/live/nov25.ruthvik.com/privkey.pem ~/ssl/key.pem
 sudo chmod 644 ~/ssl/cert.pem
 sudo chmod 600 ~/ssl/key.pem
 ```
@@ -163,7 +163,7 @@ sudo chmod 600 ~/ssl/key.pem
 
 ## 8. Configure DNS with Route53
 
-We pointed `nov25.vishnukosuri.com` (registered on GoDaddy) to EC2 using Route53.
+We pointed `nov25.ruthvik.com` (registered on GoDaddy) to EC2 using Route53.
 
 ```bash
 # List hosted zones
@@ -189,7 +189,7 @@ aws route53 change-resource-record-sets --hosted-zone-id Z07804063UTVB9OMK1MMB -
   "Changes": [{
     "Action": "CREATE",
     "ResourceRecordSet": {
-      "Name": "nov25.vishnukosuri.com",
+      "Name": "nov25.ruthvik.com",
       "Type": "A",
       "TTL": 300,
       "ResourceRecords": [{"Value": "34.205.191.236"}]
@@ -224,7 +224,7 @@ docker run \
   312846473135.dkr.ecr.us-east-1.amazonaws.com/nov25-class5:3.0
 
 # Verify HTTP redirects to HTTPS
-curl -I http://nov25.vishnukosuri.com
+curl -I http://nov25.ruthvik.com
 ```
 
 Result: `HTTP/1.1 301 Moved Permanently` — Successfully redirecting to HTTPS.
@@ -331,7 +331,7 @@ EC2 instance uses an IAM Role to access ECR — no access keys stored on the ser
 User Browser
      │
      ▼ HTTPS (port 443)
-Route53 DNS (nov25.vishnukosuri.com)
+Route53 DNS (nov25.ruthvik.com)
      │
      ▼
 EC2 Instance (34.205.191.236)
@@ -355,7 +355,7 @@ EC2 Instance (34.205.191.236)
 | EC2 Instance | student-portal-server (t2.micro, Amazon Linux 2023) |
 | RDS Endpoint | nov25-class5.cy9waccq8dq8.us-east-1.rds.amazonaws.com |
 | ECR Repository | 312846473135.dkr.ecr.us-east-1.amazonaws.com/nov25-class5 |
-| Domain | nov25.vishnukosuri.com |
+| Domain | nov25.ruthvik.com |
 | Route53 Hosted Zone | Z07804063UTVB9OMK1MMB |
 | IAM Role | EC2-ECR-Access-Role |
 
