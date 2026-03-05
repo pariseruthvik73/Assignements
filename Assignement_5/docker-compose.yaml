@@ -1,0 +1,50 @@
+version: '3.9'
+
+services:
+
+  # ── PHP App ──────────────────────────────────────────────────
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dayflow_app
+    ports:
+      - "80:80"
+    environment:
+      DB_HOST:     db
+      DB_PORT:     5432
+      DB_NAME:     dayflow
+      DB_USER:     postgres
+      DB_PASSWORD: ${DB_PASSWORD:-postgres}
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - dayflow_net
+
+  # ── PostgreSQL ────────────────────────────────────────────────
+  db:
+    image: postgres:15-alpine
+    container_name: dayflow_db
+    environment:
+      POSTGRES_DB:       dayflow
+      POSTGRES_USER:     postgres
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - dayflow_net
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+
+networks:
+  dayflow_net:
+    driver: bridge

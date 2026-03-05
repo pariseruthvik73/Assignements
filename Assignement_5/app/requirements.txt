@@ -1,0 +1,9 @@
+# PHP Application — dependencies managed via Docker
+# PHP Extensions required (installed via Dockerfile):
+#   - php 8.2
+#   - php-pdo
+#   - php-pdo_pgsql
+#   - nginx
+#   - postgresql-dev
+#
+# To install/run: docker-compose up --build
